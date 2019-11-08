@@ -1,0 +1,14 @@
+.main_content
+	#resto_top.row
+		.col-md-8
+			#resto_info
+				%h1= @resto.name
+				%p.description= @resto.address
+				%p.description= @resto.cuisine.name
+				%p.description= @resto.contact
+				= div_for @resto do
+					= render partial: "stars/button", locals: { resto: @resto }
+				= link_to "Back", root_path, class: "btn btn-default"
+				= link_to "Edit", edit_resto_path, class: "btn btn-default",  data: { no_turbolink: true }
+				= link_to "Delete", resto_path, method: :delete, data: {confirm: "Are you sure?" }, class: "btn btn-default"
+

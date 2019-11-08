@@ -1,0 +1,46 @@
+<div class ="container">
+<div class="row">
+   <div class= "col-md-12">
+   <div class="row">
+   <div class= "col-md-4">
+   <div class="panel panel-default">
+  <div class="panel-heading">Sort By</div>
+  <div class="panel-body">
+  <ul>
+  <li><%= link_to "Starred Restaurants", starred_restos_path %></li>
+  <li><%= link_to "Most Popular Restaurants", popular_restos_path %></li>
+  </ul>
+  </div>
+</div>
+   </div>
+   <div class= "col-md-8">
+     <% @restos.each do |resto| %>
+      <div id="resto_info">     
+        <h1>
+          <%= link_to resto.name, resto, style: 'color:#FFFFF;' %>
+        </h1>
+        <p class="description">
+          <%= resto.address %>
+        </p>
+        <p class="description">
+          <%= resto.cuisine.name %>
+          <p class="description">
+          <%= resto.contact %>
+          </p>
+          <%= div_for resto do %>
+					<%= render partial: "stars/button", locals: { resto: resto } %>
+          <%= resto.stars.count %>
+          <% end %>
+        </p> 
+  </div>
+    <% end %>     
+  <% if current_page?(action: 'random') %>
+  <% else %>
+  <%= paginate @restos %>
+  <% end %>
+  </div>
+  </div>
+
+  </div>
+  </div>
+  </div>

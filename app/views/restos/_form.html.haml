@@ -1,0 +1,15 @@
+= simple_form_for @resto, html: { multipart: true } do |f|
+    - if @resto.errors.any?
+        #errors
+            %p
+                = @resto.errors.count
+                Prevented this resto froms saving
+            %ul
+                - @resto.errors.full_messages.each do |msg|
+                    %li= msg
+    .panel-body
+    = f.input :name, input_html: { class: 'form-control' }
+    = f.input :address, input_html: { class: 'form-control' }
+    = f.input :contact, input_html: { class: 'form-control' }
+    = f.collection_select :cuisine_id, Cuisine.all, :id, :name, {prompt: "Choose a cuisine", class: 'form-control' }
+    = f.button :submit, class: "btn btn-primary"

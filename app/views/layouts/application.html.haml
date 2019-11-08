@@ -1,0 +1,33 @@
+!!! 5
+%html
+%head
+    %title Tomato
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
+    = stylesheet_link_tag 'application', 'http://fonts.googleapis.com/css?family=Raleway:400,700'
+    = javascript_include_tag 'application', 'https://kit.fontawesome.com/8b7a173684.js'
+    = csrf_meta_tags
+
+%body
+    %nav.navbar.navbar-default
+        .container
+            .navbar-brand= link_to "Tomato", root_path
+            %ul.nav.navbar-nav
+                %li= link_to "All Cuisines", root_path
+                %li= link_to "Random", random_restos_path
+                - Cuisine.all.each do |cuisine| # listing categories
+                    %li= link_to cuisine.name, restos_path(cuisine: cuisine.name)
+
+            - if user_signed_in?
+                %ul.nav.navbar-nav.navbar-right
+                    %li= link_to "New Restaurant", new_resto_path,  data: { no_turbolink: true }
+                    %li= link_to "Sign Out", destroy_user_session_path, method: :delete
+            - else
+                %ul.nav.navbar-nav.navbar-right
+                    %li= link_to "Sign Up", new_user_registration_path
+                    %li= link_to "Sign In", new_user_session_path
+
+    .container
+        - flash.each do |name, msg|
+            = content_tag :div, msg, class: "alert"
+
+        = yield
