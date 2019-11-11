@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  rolify
+  after_create :assign_default_role
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -6,8 +8,13 @@ class User < ActiveRecord::Base
 
          has_many :stars, dependent: :destroy
          has_many :restos, through: :stars
+
          
-         def star!(resto)
+        def assign_default_role
+        self.add_role(:newuser) if self.roles.blank?
+        end
+         
+        def star!(resto)
           self.stars.create!(resto_id: resto.id)
         end
         
@@ -21,5 +28,5 @@ class User < ActiveRecord::Base
         def star?(resto)
           self.stars.find_by_resto_id(resto.id)
         end
-        
+  
 end

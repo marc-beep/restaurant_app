@@ -8,7 +8,9 @@
 				%p.description= @resto.contact
 				= div_for @resto do
 					= render partial: "stars/button", locals: { resto: @resto }
-				= link_to "Back", root_path, class: "btn btn-default"
-				= link_to "Edit", edit_resto_path, class: "btn btn-default",  data: { no_turbolink: true }
-				= link_to "Delete", resto_path, method: :delete, data: {confirm: "Are you sure?" }, class: "btn btn-default"
+				- if current_user && current_user.has_role?(:admin)
+					= link_to "Back", root_path, class: "btn btn-default"
+					= link_to "Edit", edit_resto_path, class: "btn btn-default",  data: { no_turbolink: true }
+					= link_to "Delete", resto_path, method: :delete, data: {confirm: "Are you sure?" }, class: "btn btn-default"
+				
 

@@ -16,6 +16,7 @@ gem 'bootstrap-sass', '~> 3.4', '>= 3.4.1'
 gem 'haml', '~> 5.1', '>= 5.1.2'
 gem "font-awesome-rails"
 gem 'cancancan'
+gem 'rolify'
 gem 'faker'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby

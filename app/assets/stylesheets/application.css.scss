@@ -115,7 +115,7 @@
      margin-bottom: 50px;
  }
  
- #resto_info, #ingredients, #directions {
+ #resto_info {
      background: white;
      @include box-shadow;
     //  min-height: 360px;
@@ -145,17 +145,6 @@
      .description {
          color: #8A8A8A;
          font-size: 20px;
-     }
- }
- 
- #ingredients, #directions {
-     margin-bottom: 50px;
-     ul, ol {
-         padding-left: 18px;
-         li {
-             padding: 1em 0;
-             border-bottom: 1px solid #EAEAEA;
-         }
      }
  }
  

@@ -1,10 +1,10 @@
 class RestosController < ApplicationController
   before_action :set_resto, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, except: [:index, ]
-
+  before_action :authenticate_user!, except: [:index, :show, :random, :most_popular]
+  authorize_resource class: false, except: [:index, :show, :random, :most_popular] 
   # GET /restos
   # GET /restos.json
-  def index
+  def index  
     if params[:cuisine]. blank?
     @restos = Resto.includes(:stars).order(created_at: :desc).page params[:page]
     else
